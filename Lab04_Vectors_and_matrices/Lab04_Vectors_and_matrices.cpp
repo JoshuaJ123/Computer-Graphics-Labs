@@ -51,29 +51,29 @@ int main() {
     printf("b . (a x b) = %0.3f\n", glm::dot(b, glm::cross(a, b)));
 
     //defining matrices
-    glm::mat2 A, B;
+    glm::mat2 D, E;
 
-    A[0][0] = 1.0f, A[0][1] = 2.0f;
-    A[1][0] = 3.0f, A[1][1] = 4.0f;
+    D[0][0] = 1.0f, D[0][1] = 2.0f;
+    D[1][0] = 3.0f, D[1][1] = 4.0f;
 
-    B = glm::mat2(5.0f, 6.0f, 7.0f, 8.0f);
+    E = glm::mat2(5.0f, 6.0f, 7.0f, 8.0f);
 
     printf("\nDefining matrices:\n");
-    std::cout << "A = " << A << std::endl;
-    std::cout << "B = " << B << std::endl;
+    std::cout << "A = " << D << std::endl;
+    std::cout << "B = " << E << std::endl;
 
-    std::cout << "A= " << glm::transpose(A) << "\n" << std::endl;
-    std::cout << "B= " << glm::transpose(B) << "\n" << std::endl;
+    std::cout << "A= " << glm::transpose(D) << "\n" << std::endl;
+    std::cout << "B= " << glm::transpose(E) << "\n" << std::endl;
 
     //arithmetic operations on matrices
     printf("\nArithmetic operations on matrices:\n");
-    std::cout << "A + B = " << glm::transpose(A + B) << "\n" << std::endl;
-    std::cout << "A - B = " << glm::transpose(A - B) << "\n" << std::endl;
-    std::cout << "2A    = " << glm::transpose(2.0f * A) << "\n" << std::endl;
-    std::cout << "A / 3 = " << glm::transpose(A / 3.0f) << "\n" << std::endl;
+    std::cout << "A + B = " << glm::transpose(D + E) << "\n" << std::endl;
+    std::cout << "A - B = " << glm::transpose(D - E) << "\n" << std::endl;
+    std::cout << "2A    = " << glm::transpose(2.0f * D) << "\n" << std::endl;
+    std::cout << "A / 3 = " << glm::transpose(D / 3.0f) << "\n" << std::endl;
 
-    std::cout << "A * B = " << glm::transpose(B * A) << "\n" << std::endl;
-    std::cout << "B * A = " << glm::transpose(A * B) << "\n" << std::endl;
+    std::cout << "A * B = " << glm::transpose(E * D) << "\n" << std::endl;
+    std::cout << "B * A = " << glm::transpose(D * E) << "\n" << std::endl;
 
     //the identity matrix
     printf("\nThe identity matrix:\n");
@@ -82,12 +82,12 @@ int main() {
 
     //Inverse of a matrix
     printf("\nInverse of a matrix:\n");
-    glm::mat2 invA = glm::inverse(A);
-    glm::mat2 invB = glm::inverse(B);
+    glm::mat2 invA = glm::inverse(D);
+    glm::mat2 invB = glm::inverse(E);
     std::cout << "invA = " << glm::transpose(invA) << "\n" << std::endl;
     std::cout << "invB = " << glm::transpose(invB) << "\n" << std::endl;
-    std::cout << "invA * A = " << glm::transpose(A * invA) << "\n" << std::endl;
-    std::cout << "invB * B = " << glm::transpose(B * invB) << "\n" << std::endl;
+    std::cout << "invA * A = " << glm::transpose(D * invA) << "\n" << std::endl;
+    std::cout << "invB * B = " << glm::transpose(E * invB) << "\n" << std::endl;
 
     //exercises
     //exercise 2
@@ -110,5 +110,25 @@ int main() {
     printf("p . q = %0.3f\n", glm::dot(p, q));
     //g)
     std::cout <<"q x r = \n" << glm::cross(q, r) << std::endl;
+
+    //exercise 3
+    glm::mat2 A, B, C;
+    A[0][0] = -1.0f, A[0][1] = 3.0f;
+    A[1][0] = 2.0f, A[1][1] = -5.0f;
+    B[0][0] = 0.0f, B[0][1] = 2.0f;
+    B[1][0] = 7.0f, B[1][1] = 1.0f;
+    C[0][0] = 3.0f, C[0][1] = 2.0f;
+    C[1][0] = -3.0f, C[1][1] = -4.0f;
+    //a)
+    std::cout << "AB = " << glm::transpose(B * A) << "\n" << std::endl;
+    //b)
+    std::cout << "ABC = " << glm::transpose(C * B * A) << "\n" << std::endl;
+    //c)
+    std::cout << "CBA = " << glm::transpose(A * B * C) << "\n" << std::endl;
+    //d)
+    std::cout << "A^TB = " << glm::transpose(B * glm::transpose(A)) << "\n" << std::endl;
+    //e)
+    std::cout << "invA = " << glm::transpose(glm::inverse(A)) << "\n" << std::endl;
+
     return 0;
 }
