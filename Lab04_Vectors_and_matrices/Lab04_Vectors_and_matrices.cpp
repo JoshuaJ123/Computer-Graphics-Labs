@@ -90,8 +90,25 @@ int main() {
     std::cout << "invB * B = " << glm::transpose(B * invB) << "\n" << std::endl;
 
     //exercises
-    //exercise 1
+    //exercise 2
+    glm::vec3 p, q, r, qHat;
     //a)
-
+    p = glm::vec3(10.0f - 5.0f, 7.0f - 1.0f, 4.0f - 3.0f);
+    std::cout << "p = " << p << std::endl;
+    //b)
+    q = glm::vec3(0.0f - 10.0f, 5.0f - 7.0f, -3.0f - 4.0f);
+    std::cout << "q = " << q << std::endl;
+    //c)
+    r = glm::vec3(0.0f - 5.0f, 5.0f - 1.0f, -3.0f - 3.0f);
+    std::cout << "r = " << r << std::endl;
+    //d)
+    printf("Length of p = %0.3f\n", glm::length(p));
+    //e)
+    qHat = glm::normalize(q);
+    std::cout << "qHat = " << qHat << std::endl;
+    //f)
+    printf("p . q = %0.3f\n", glm::dot(p, q));
+    //g)
+    std::cout <<"q x r = \n" << glm::cross(q, r) << std::endl;
     return 0;
 }
