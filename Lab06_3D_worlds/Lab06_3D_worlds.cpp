@@ -226,8 +226,23 @@ int main( void )
         glm::vec3(3.0f, -2.0f, -5.0f),
         glm::vec3(4.0f,  2.0f, -4.0f),
         glm::vec3(2.0f,  0.0f, -2.0f),
-        glm::vec3(-1.0f,  1.0f, -2.0f)
+        glm::vec3(-1.0f,  1.0f, -2.0f)  
     };
+
+    //exercise 4
+    //std::vector<glm::vec3> positions;
+
+    //float spacing = 2.0f;
+
+    //for (int x = 0; x < 10; x++)
+    //{
+    //    for (int z = 0; z < 10; z++)
+    //    {
+    //        float offset = (10 - 1) * spacing / 2.0f;
+    //        positions.push_back(glm::vec3(x * spacing - offset, 0.0f, z * spacing - offset));
+    //    }
+    //}
+
     
     std::vector<Object> objects;
     Object object;
@@ -281,6 +296,20 @@ int main( void )
         camera.target = objects[0].position;
         camera.calculateMatrices();
 
+        //exercise 1
+        //float Angle = (glfwGetTime() / 5.0f) * 2.0f * 3.1416f;
+        //glm::vec3 centre = objects[0].position;
+
+        //float x = centre.x + 10.0f * cos(Angle);
+        //float z = centre.z + 10.0f * sin(Angle);
+        //float y = centre.y;
+        //camera.eye = glm::vec3(x, y, z);
+        //camera.target = centre;
+        //camera.calculateMatrices();
+
+        //exercise 2
+        //float currentTime = glfwGetTime();
+
         // Loop through cubes and draw them
         for (int i = 0; i < static_cast<unsigned int>(objects.size()); i++)
         {
@@ -288,6 +317,18 @@ int main( void )
             glm::mat4 translate = Maths::translate(objects[i].position);
             glm::mat4 scale     = Maths::scale(objects[i].scale);
             glm::mat4 rotate    = Maths::rotate(objects[i].angle, objects[i].rotation);
+
+            //exercise 2
+            //glm::mat4 rotate;
+
+            //if (i % 2 == 1) {
+            //    float angle = glm::radians(360.0f) * fmod(currentTime, 2.0f) / 2.0f;
+            //    glm::vec3 axis = glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f));
+            //    rotate = glm::rotate(glm::mat4(1.0f), angle, axis);
+            //}
+            //else
+            //    rotate = Maths::rotate(objects[i].angle, objects[i].rotation);
+
             glm::mat4 model     = translate * rotate * scale;
 
             // Calculate the MVP matrix
@@ -333,4 +374,17 @@ void keyboardInput(GLFWwindow *window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    //exercise 3
+    //if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+    //    camera.fov -= Maths::radians(1.0f);
+    //    std::cout << "FOV: " << camera.fov << std::endl;
+    //}
+
+    //if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+    //    std::cout << "FOV: " << camera.fov << std::endl;
+    //    camera.fov += Maths::radians(1.0f);
+    //}
+        
+    //camera.fov = glm::clamp(camera.fov, Maths::radians(10.0f), Maths::radians(90.0f));
 }
