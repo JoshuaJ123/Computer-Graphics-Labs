@@ -8,11 +8,20 @@
 #include <common/texture.hpp>
 #include <common/maths.hpp>
 
+// Include the glm library
+#include <glm/glm.hpp>
+#include <glm/gtx/io.hpp>
+
 // Function prototypes
 void keyboardInput(GLFWwindow *window);
 
 int main( void )
 {
+    // defining two vectors for exercise 4
+    glm::vec3 P, V;
+    P = glm::vec3(0.0f, 0.0f, 0.0f);
+    V = glm::vec3(0.01f, 0.005f, 0.0f);
+
     // =========================================================================
     // Window creation - you shouldn't need to change this code
     // -------------------------------------------------------------------------
@@ -159,13 +168,58 @@ int main( void )
         //glm::mat4 rotate = Maths::rotate(angle, glm::vec3(0.0f, 0.0f, 1.0f));
 
         // Animate rectangle
-        float angle = Maths::radians(glfwGetTime() * 360.0f / 3.0f);
-        glm::mat4 translate = Maths::translate(glm::vec3(0.4f, 0.3f, 0.0f));
-        glm::mat4 scale = Maths::scale(glm::vec3(0.4f, 0.3f, 0.0f));
-        glm::mat4 rotate = Maths::rotate(angle, glm::vec3(0.0f, 0.0f, 1.0f));
+        //float angle = Maths::radians(glfwGetTime() * 360.0f / 5.0f);
+        //glm::mat4 translate = Maths::translate(glm::vec3(0.5f, 0.0f, 0.0f));
+        //glm::mat4 scale = Maths::scale(glm::vec3(0.25f, 0.25f, 0.0f));
+        //glm::mat4 rotate = Maths::rotate(angle, glm::vec3(0.0f, 0.0f, 1.0f));
+
+        //exercise 1
+        //float angle = Maths::radians(glfwGetTime() * 360.0f / 5.0f);
+        //float x = 0.5f * cos(angle);
+        //float y = 0.5f * sin(angle);
+        //glm::vec3 position = glm::vec3(x, y, 0.0f);
+        //glm::mat4 translate = Maths::translate(position);
+        //glm::mat4 scale = Maths::scale(glm::vec3(0.25f, 0.25f, 1.0f));
+        //glm::mat4 transformation = translate * scale;
+
+        //exercise 2
+        //float angle = Maths::radians(glfwGetTime() * 360.0f / 5.0f);
+        //float x = 0.5f * cos(angle);
+        //float y = 0.5f * sin(angle);
+        //glm::vec3 position = glm::vec3(x, y, 0.0f);
+        //glm::mat4 translate = Maths::translate(position);
+        //glm::mat4 scale = Maths::scale(glm::vec3(0.25f, 0.25f, 1.0f));
+        //glm::mat4 rotate = Maths::rotate(-2*angle, glm::vec3(0.0f, 0.0f, 1.0f));
+        //glm::mat4 transformation = translate * scale * rotate;
+
+        //exercise 3
+        //float angle = Maths::radians(glfwGetTime() * 360.0f / 5.0f);
+        //float x = 0.5f * cos(angle);
+        //float y = 0.5f * sin(angle);
+        //float baseScale = 0.25f;
+        //float amplitude = 0.15f;
+        //float imageScale = baseScale + amplitude * sin(glfwGetTime()*6);
+        //glm::vec3 position = glm::vec3(x, y, 0.0f);
+        //glm::mat4 translate = Maths::translate(position);
+        //glm::mat4 scale = Maths::scale(glm::vec3(imageScale, imageScale, 1.0f));
+        //glm::mat4 rotate = Maths::rotate(-2 * angle, glm::vec3(0.0f, 0.0f, 1.0f));
+        //glm::mat4 transformation = translate * scale * rotate;
+
+        //exercise 4
+        P += V;
+
+        glm::mat4 scale = Maths::scale(glm::vec3(0.2f, 0.2f, 1.0f));
+        glm::mat4 translate = Maths::translate(glm::vec3(P.x, P.y, 0.0f));
+        glm::mat4 transformation = translate * scale;
+
+        if (P.x > 0.9f || P.x < -0.9f)
+            V.x = -V.x;
+
+        if (P.y > 0.9f || P.y < -0.9f)
+            V.y = -V.y;
 
         //send the transformation matrix to the vertex shader
-        glm::mat4 transformation = rotate * translate * scale;
+        //glm::mat4 transformation = rotate * translate * scale;
         unsigned int transformationID = glGetUniformLocation(shaderID, "transformation");
         glUniformMatrix4fv(transformationID, 1, GL_FALSE, &transformation[0][0]);
         

@@ -19,7 +19,7 @@ float Maths::radians(float angle)
 	return angle * 3.1416f / 180.0f;
 }
 
-glm::mat4 Maths::rotate(const float& angle, glm::vec3 v)
+glm::mat4 Maths::rotate(const float &angle, glm::vec3 v)
 {
 	v = glm::normalize(v);
 	float c = cos(angle);
