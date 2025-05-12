@@ -139,30 +139,30 @@ int main( void )
 
     // Add first point light source
     Light light;
-    //light.position = glm::vec3(2.0f, 2.0f, 2.0f);
-    //light.colour = glm::vec3(1.0f, 1.0f, 1.0f);
-    //light.constant = 1.0f;
-    //light.linear = 0.1f;
-    //light.quadratic = 0.02f;
-    //light.type = 1;
-    //lightSources.push_back(light);
+    light.position = glm::vec3(2.0f, 2.0f, 2.0f);
+    light.colour = glm::vec3(1.0f, 1.0f, 1.0f);
+    light.constant = 1.0f;
+    light.linear = 0.1f;
+    light.quadratic = 0.02f;
+    light.type = 1;
+    lightSources.push_back(light);
 
     // Add second point light source
-    //light.position = glm::vec3(1.0f, 1.0f, -8.0f);
-    //lightSources.push_back(light);
+    light.position = glm::vec3(1.0f, 1.0f, -8.0f);
+    lightSources.push_back(light);
 
     // Add spotlight
-    //light.position = glm::vec3(0.0f, 3.0f, 0.0f);
-    //light.direction = glm::vec3(0.0f, -1.0f, 0.0f);
-    //light.cosPhi = std::cos(Maths::radians(45.0f));
-    //light.type = 2;
-    //lightSources.push_back(light);
+    light.position = glm::vec3(0.0f, 3.0f, 0.0f);
+    light.direction = glm::vec3(0.0f, -1.0f, 0.0f);
+    light.cosPhi = std::cos(Maths::radians(45.0f));
+    light.type = 2;
+    lightSources.push_back(light);
 
     // Add directional light
-    //light.direction = glm::vec3(1.0f, -1.0f, 0.0f);
-    //light.colour = glm::vec3(1.0f, 1.0f, 0.0f);
-    //light.type = 3;
-    //lightSources.push_back(light);
+    light.direction = glm::vec3(1.0f, -1.0f, 0.0f);
+    light.colour = glm::vec3(1.0f, 1.0f, 0.0f);
+    light.type = 3;
+    lightSources.push_back(light);
 
     // Teapot positions
     glm::vec3 positions[] = {
@@ -207,16 +207,16 @@ int main( void )
         //lightSources.push_back(light);
 
         //exercise 3
-        float xpos = cos(glfwGetTime()) * 5.0f;
-        float zpos = sin(glfwGetTime()) * 5.0f;
-        lightSources.clear();
-        light.position = glm::vec3(xpos, 0.0f, -5.0f + zpos);
-        light.colour = glm::vec3(1.0f, 0.0f, 1.0f);
-        light.constant = 1.0f;
-        light.linear = 0.1f;
-        light.quadratic = 0.02f;
-        light.type = 1;
-        lightSources.push_back(light);
+        //float xpos = cos(glfwGetTime()) * 5.0f;
+        //float zpos = sin(glfwGetTime()) * 5.0f;
+        //lightSources.clear();
+        //light.position = glm::vec3(xpos, 0.0f, -5.0f + zpos);
+        //light.colour = glm::vec3(1.0f, 0.0f, 1.0f);
+        //light.constant = 1.0f;
+        //light.linear = 0.1f;
+        //light.quadratic = 0.02f;
+        //light.type = 1;
+        //lightSources.push_back(light);
 
         // Update timer
         float time   = glfwGetTime();

@@ -56,7 +56,7 @@ void main ()
 
         // Calculate spotlight
         if (lightSources[i].type == 2)
-            fragmentColour += spotLight(lightPosition, lightDirection, lightColour, cosPhi, constant, linear, quadratic);// Calculate spotlight
+            fragmentColour += spotLight(lightPosition, lightDirection, lightColour, cosPhi, constant, linear, quadratic);
 
         // Calculate directional light
         if (lightSources[i].type == 3)
@@ -91,7 +91,7 @@ vec3 pointLight(vec3 lightPosition, vec3 lightColour, float constant, float line
                                quadratic * distance * distance);
     
     // Fragment colour
-    return (ambient + diffuse + specular) * attenuation;
+        return (ambient + diffuse + specular) * attenuation;
 }
 
 // Calculate spotlight
