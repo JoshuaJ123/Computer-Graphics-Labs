@@ -11,8 +11,14 @@
 // Function prototypes
 void keyboardInput(GLFWwindow *window);
 
+void mouseInput(GLFWwindow *window);
+
 // Create camera object
 Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+// Frame timer
+float prevTime = 0.0f;
+float deltaTime = 0.0f;
 
 // Object struct
 struct Object
@@ -70,9 +76,17 @@ int main( void )
     
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
+
+    // Enable back face culling
+    glEnable(GL_CULL_FACE);
     
     // Ensure we can capture keyboard inputs
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    // Capture mouse movement
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwPollEvents();
+    glfwSetCursorPos(window, 1024 / 2, 768 / 2);
     
     // Define cube object
     // Define vertices
@@ -244,8 +258,14 @@ int main( void )
     // Render loop
     while (!glfwWindowShouldClose(window))
     {
+        // Update frame time
+        float time = glfwGetTime();
+        deltaTime = time - prevTime;
+        prevTime = time;
+
         // Get inputs
         keyboardInput(window);
+        mouseInput(window);
         
         // Clear the window
         glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -309,4 +329,28 @@ void keyboardInput(GLFWwindow *window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera.eye += 5.0f * deltaTime * camera.front;
+
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera.eye -= 5.0f * deltaTime * camera.front;
+
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera.eye -= 5.0f * deltaTime * camera.right;
+
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera.eye += 5.0f * deltaTime * camera.right;
+}
+
+void mouseInput(GLFWwindow *window)
+{
+    // Get mouse position and reset to centre
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+    glfwSetCursorPos(window, 1024 / 2, 768 / 2);
+
+    // Update yaw and pitch angles
+    camera.yaw   += 0.0005f * float(xpos - 1024 / 2);
+    camera.pitch += 0.0005f * float(768 / 2 - ypos);
 }
