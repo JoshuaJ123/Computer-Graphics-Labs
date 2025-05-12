@@ -30,6 +30,12 @@ struct Object
     std::string name;
 };
 
+// Exercise 2
+bool isJumping = false;
+float jumpTime = 0.0f;
+float jumpDuration = 1.0f;
+float jumpHeight = 2.0f;
+
 int main( void )
 {
     // =========================================================================
@@ -266,6 +272,37 @@ int main( void )
         // Get inputs
         keyboardInput(window);
         mouseInput(window);
+
+        // Exercise 2
+        if (isJumping)
+        {
+            jumpTime += deltaTime;
+            float t = jumpTime / jumpDuration;
+
+            if (t >= 1.0f)
+            {
+                isJumping = false;
+                camera.eye.y = 0.0f;
+            }
+            else
+            {
+                camera.eye.y = jumpHeight * sin(glm::pi<float>() * t);
+            }
+        }
+
+        //exercise 3
+        for (auto& cube : objects)
+		{
+            glm::vec3 cubeCentre = cube.position;
+            glm::vec3 offset = camera.eye - cubeCentre;
+            float distance = glm::length(offset);
+
+            if (distance < 1.0f)
+            {
+                glm::vec3 pushDirection = glm::normalize(offset);
+                camera.eye = cubeCentre + pushDirection * 1.0f;
+            }
+		}
         
         // Clear the window
         glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -341,6 +378,15 @@ void keyboardInput(GLFWwindow *window)
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.eye += 5.0f * deltaTime * camera.right;
+
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    {
+        isJumping = true;
+        jumpTime = 0.0f;
+    }
+
+    //exercise 1
+    camera.eye.y = 0.0f; // Prevent camera from moving up and down
 }
 
 void mouseInput(GLFWwindow *window)
