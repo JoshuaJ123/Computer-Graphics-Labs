@@ -179,6 +179,25 @@ int main( void )
     object.angle = 0.0f;
     object.name = "floor";
     objects.push_back(object);
+
+    // Exercise 1
+    // Load the wall model
+    Model wall("../assets/plane.obj");
+    wall.addTexture("../assets/bricks_diffuse.png", "diffuse");
+    wall.addTexture("../assets/bricks_normal.png", "normal");
+    wall.addTexture("../assets/bricks_specular.png", "specular");
+
+    wall.ka = 0.2f;
+    wall.kd = 1.0f;
+    wall.ks = 1.0f;
+    wall.Ns = 20.0f;
+
+    object.position = glm::vec3(0.0f, 4.0f, -5.0f);
+    object.scale = glm::vec3(5.0f, 1.0f, 5.0f);
+    object.rotation = glm::vec3(1.0f, 0.0f, 0.0f);
+    object.angle = Maths::radians(90.0f);
+    object.name = "wall";
+    objects.push_back(object);
     
     // Render loop
     while (!glfwWindowShouldClose(window))
@@ -227,6 +246,9 @@ int main( void )
 
             if (objects[i].name == "floor")
                 floor.draw(shaderID);
+
+            if (objects[i].name == "wall")
+                wall.draw(shaderID);
         }
         
         // Draw light sources
