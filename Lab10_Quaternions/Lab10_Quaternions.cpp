@@ -160,8 +160,7 @@ int main( void )
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         // Calculate view and projection matrices
-        camera.target = camera.eye + camera.front;
-        camera.calculateMatrices();
+        camera.quaternionCamera();
         
         // Activate shader
         glUseProgram(shaderID);
